@@ -34,7 +34,7 @@ public class CasController {
     //加入produces可以防止乱码！！
     @ResponseBody //自动封装成json
     public List<CasProdecut> findCas(String searchArgs) {
-        if (searchArgs != null) {
+        if (searchArgs.length()>0) {
             String newArgs = "%"+searchArgs+"%";
             List<CasProdecut> casProdecuts = casProdecutService.queryByNameAndNo(newArgs);
             return casProdecuts;

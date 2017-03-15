@@ -25,15 +25,15 @@ public class CasProdecutServiceImplTest {
     private CasProdecutDao casProdecutDao;
     @Test
     public void queryByNameAndNo() throws Exception {
-        List<CasProdecut> casProdecut = casProdecutDao.queryByNameAndNo("1932593-57-1");
+        List<CasProdecut> casProdecut = casProdecutDao.queryByNameAndNo("%99631%");
         System.out.println(casProdecut);
 
     }
 
-    @Test
-    public void queryAll() throws Exception {
-        List<CasProdecut> casProdecuts = casProdecutDao.queryAll(0, 100);
-        casProdecuts.forEach((casProdecut)->System.out.println(casProdecut));
-    }
+//    @Test
+//    public void queryAll() throws Exception {
+//        List<CasProdecut> casProdecuts = casProdecutDao.queryAll(0, 100);
+//        casProdecuts.forEach((casProdecut)->System.out.println(casProdecut));
+//    }
 
 }
