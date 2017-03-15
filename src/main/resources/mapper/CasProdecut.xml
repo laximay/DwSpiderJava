@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dwSpider.dao.CasProdecutDao">
+    <!--目的：为dao方法提供sql语句配置-->
+
+
+
+    <select id="queryByNameAndNo" resultType="CasProdecut" >
+      select cas_name, cas_no, synonyms , formula, exact_mass, molecular_weight, psa, logp, cas_url
+      FROM cas_prodecut
+      WHERE cas_name like #{searchArgs} or cas_no like #{searchArgs}
+    </select>
+
+    <select id="queryAll" resultType="CasProdecut">
+      select cas_name, cas_no, synonyms , formula, exact_mass, molecular_weight, psa, logp, cas_url
+      FROM cas_prodecut
+      ORDER BY cas_no DESC
+      Limit  #{offet}, #{limit}
+    </select>
+
+</mapper>
+
+
