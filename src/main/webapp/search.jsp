@@ -4,6 +4,7 @@
 <html>
 <head>
     <title>搜索CSA</title>
+
     <%@include file="WEB-INF/jsp/common/head.jsp" %> <!--静态包含产生一个service，动态的话会产生多个-->
     <style>
 
@@ -46,7 +47,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h3 class="modal-title text-center" id="contactTitle"></h3>
+                    <h4 class="modal-title text-left" id="contactTitle"></h4>
                 </div>
 
                 <div class="modal-body">
@@ -100,42 +101,44 @@
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
+    var pageNO = 1;
+
     $(function () {
         $("#search_btn").click(function () {
             var search_keyword = $("#search_keyword").val();
             var cat_list = $("#casList");
-
+            pageNO = 1
             $.ajax({
                 url: '/cas/findCas',
                 type: 'GET',
                 data: {
-                    searchArgs: search_keyword
+                    searchArgs: search_keyword,
+                    pageNo : pageNO
                 },
                 success: function (data) {
                     var str = '';
                     cat_list.empty();
-                    if (data.length > 0) {
 
-                        for (var i = 0; i < data.length; i++) {
+                    if (data['status']==1) {
+                        var list = data['content'];
+                        for (var i = 0; i < list.length ; i++) {
                             str += '<li class="list-group-item">';
-                            for (var key in data[i]) {
+                            for (var key in list[i]) {
                                 if (key != "casUrl") {
                                     if (key == "casNO") {
-                                        str += '<img class="casImg" src="/casimg/' + data[i][key] + '.png" />'
+                                        str += '<img class="casImg" src="/casimg/' + list[i][key] + '.png" />'
 
                                     }
-                                    str += '<p class="text-left">' + key + ':<strong>' + data[i][key].replace("View More", "") + '</strong></p>';
+                                    str += '<p class="text-left"><span class="text-uppercase"> ' + key + ':</span><strong>' + list[i][key].replace("View More", "") + '</strong></p>';
                                 }
                             }
-                            str += '<button type="button" class="btn btn-primary btn-sm" data-casno=' + data[i]['casNO'] + ' data-casname=' + data[i]['casName'] + ' data-toggle="modal" data-target="#contactModal"><span class="glyphicon glyphicon-envelope"></span> Contact us!</button></li>';
+                            str += '<button type="button" class="btn btn-primary btn-sm" data-casno=' + list[i]['casNO'] + ' data-casname=' + list[i]['casName'] + ' data-toggle="modal" data-target="#contactModal"><span class="glyphicon glyphicon-envelope"></span> Contact us!</button></li>';
                         }
-                        str += '<li class="list-group-item viewmore text-center"><span class="glyphicon glyphicon-arrow-down"></span>View more</li>'
+                        str += '<li class="list-group-item viewmore text-center" onclick="viewmore(this)" ><span class="glyphicon glyphicon-arrow-down"></span>View more</li>'
                     } else {
                         str = '<li><h2 class="text-center">not thing!</h2></li>';
                     }
                     cat_list.append(str);
-
-
                 },
                 error: function (xhr) {
                     console.log('错误');
@@ -157,12 +160,59 @@
                 modal.modal('hide');
             })
         })
-        
-        $(".viewmore").on("click",function () {
-            console.log("viewmore")
-        })
+
+        $(document).on('click','.viewmore',function (e){
+
+        });
 
 
     })
+
+    function viewmore(e) {
+        var search_keyword = $("#search_keyword").val();
+        var cat_list = $("#casList");
+        var viewmore = $(e)
+        console.log(viewmore)
+        pageNO = pageNO+1;
+        $.ajax({
+            url: '/cas/findCas',
+            type: 'GET',
+            data: {
+                searchArgs: search_keyword,
+                pageNo : pageNO
+            },
+            success: function (data) {
+                var str = '';
+                if (data['status']==1) {
+                    var list = data['content'];
+                    for (var i = 0; i < list.length ; i++) {
+                        str += '<li class="list-group-item">';
+                        for (var key in list[i]) {
+                            if (key != "casUrl") {
+                                if (key == "casNO") {
+                                    str += '<img class="casImg" src="/casimg/' + list[i][key] + '.png" />'
+
+                                }
+                                str += '<p class="text-left"><span class="text-uppercase">' + key + ':</span><strong>' + list[i][key].replace("View More", "") + '</strong></p>';
+                            }
+                        }
+                        str += '<button type="button" class="btn btn-primary btn-sm" data-casno=' + list[i]['casNO'] + ' data-casname=' + list[i]['casName'] + ' data-toggle="modal" data-target="#contactModal"><span class="glyphicon glyphicon-envelope"></span> Contact us!</button></li>';
+                    }
+                    str += '<li class="list-group-item viewmore text-center" onclick="viewmore(this)" ><span class="glyphicon glyphicon-arrow-down"></span>View more</li>'
+                } else {
+                    str = '<li><h2 class="text-center">not thing!</h2></li>';
+                }
+                viewmore.remove();
+                cat_list.append(str);
+
+            },
+            error: function (xhr) {
+                console.log('错误');
+            }
+        })
+    }
+
+
+
 </script>
 </html>

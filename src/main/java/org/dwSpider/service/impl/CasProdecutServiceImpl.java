@@ -17,13 +17,21 @@ public class CasProdecutServiceImpl implements CasProdecutService {
     //注入Service依赖
     @Autowired
     private CasProdecutDao casProdecutDao;
+
     @Override
-    public List<CasProdecut> queryByNameAndNo(String searchArgs) {
-        return casProdecutDao.queryByNameAndNo(searchArgs);
+    public List<CasProdecut> queryByNameAndNo(String searchArgs, int offet, int limit) {
+        return casProdecutDao.queryByNameAndNo(searchArgs, offet, limit);
     }
 
     @Override
     public List<CasProdecut> queryAll(int offet, int limit) {
         return casProdecutDao.queryAll(offet, limit);
     }
+
+    @Override
+    public int getCasListCount(String searchArgs) {
+        return casProdecutDao.getCasListCount(searchArgs);
+    }
+
+
 }

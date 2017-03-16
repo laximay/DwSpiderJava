@@ -16,7 +16,7 @@ public interface CasProdecutService {
      * @param searchArgs
      * @return
      */
-    List<CasProdecut> queryByNameAndNo(String searchArgs);
+    List<CasProdecut> queryByNameAndNo(String searchArgs, int offet, int limit);
 
     /**
      * 查询所有产品
@@ -26,4 +26,11 @@ public interface CasProdecutService {
      * @return
      */
     List<CasProdecut> queryAll(int offet, int limit);
+
+    /**
+     * 查询产品列表的总行数
+     * @param searchArgs
+     * @return
+     */
+    int getCasListCount(String searchArgs);
 }

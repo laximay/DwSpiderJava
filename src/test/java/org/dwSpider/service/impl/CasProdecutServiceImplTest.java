@@ -25,10 +25,13 @@ public class CasProdecutServiceImplTest {
     private CasProdecutDao casProdecutDao;
     @Test
     public void queryByNameAndNo() throws Exception {
-        List<CasProdecut> casProdecut = casProdecutDao.queryByNameAndNo("%99631%");
+        List<CasProdecut> casProdecut = casProdecutDao.queryByNameAndNo("%99631%",0,15);
+        System.out.println(casProdecutDao.getCasListCount("%%"));
         System.out.println(casProdecut);
 
     }
+
+
 
 //    @Test
 //    public void queryAll() throws Exception {

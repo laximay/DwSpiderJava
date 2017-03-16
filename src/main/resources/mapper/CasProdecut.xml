@@ -6,11 +6,11 @@
     <!--目的：为dao方法提供sql语句配置-->
 
 
-
-    <select id="queryByNameAndNo" resultType="CasProdecut" >
+    <select id="queryByNameAndNo" resultType="CasProdecut">
       select cas_name, cas_no, synonyms , formula, exact_mass, molecular_weight, psa, logp, cas_url
       FROM cas_prodecut
-      WHERE cas_name like #{searchArgs} or cas_no like #{searchArgs}
+      WHERE cas_name like #{searchArgs} or cas_no like #{searchArgs} ORDER BY cas_no DESC
+      Limit  #{offet}, #{limit}
     </select>
 
     <select id="queryAll" resultType="CasProdecut">
@@ -18,6 +18,12 @@
       FROM cas_prodecut
       ORDER BY cas_no DESC
       Limit  #{offet}, #{limit}
+    </select>
+
+    <select id="getCasListCount" resultType="int">
+        select count(*)
+        FROM cas_prodecut
+        WHERE cas_name like #{searchArgs} or cas_no like #{searchArgs}
     </select>
 
 </mapper>

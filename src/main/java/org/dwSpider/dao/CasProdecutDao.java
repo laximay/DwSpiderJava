@@ -2,6 +2,7 @@ package org.dwSpider.dao;
 
 import org.apache.ibatis.annotations.Param;
 import org.dwSpider.entity.CasProdecut;
+
 import java.util.List;
 
 /**
@@ -10,20 +11,22 @@ import java.util.List;
 public interface CasProdecutDao {
     /**
      * 查询编号或者名称
+     *
      * @param searchArgs
      * @return
      */
-    List<CasProdecut> queryByNameAndNo(String  searchArgs);
+    List<CasProdecut> queryByNameAndNo(@Param("searchArgs") String searchArgs, @Param("offet") int offet, @Param("limit") int limit);
 
     /**
      * 查询所有产品
+     *
      * @param offet
      * @param limit
      * @return
      */
     List<CasProdecut> queryAll(@Param("offet") int offet, @Param("limit") int limit);
 
-
+    int getCasListCount(String searchArgs);
 
 
 
