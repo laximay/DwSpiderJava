@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dwSpider.dao.ContactDao">
+    <!--目的：为dao方法提供sql语句配置-->
+    <insert id="saveContact" parameterType="Contact">
+        <!-- 防止主键冲突，使用ignore 关键字-->
+        insert ignore into contact(cas_no,
+        cas_name,
+        c_name,
+        mobile,
+        email,
+        message,
+        country,
+        city)
+        VALUE (#{casNo},#{casName},#{cName},#{mobile},#{email},#{message},#{country},#{city})
+    </insert>
+
+
+
+
+
+</mapper>
+
+

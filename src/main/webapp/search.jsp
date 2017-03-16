@@ -51,27 +51,35 @@
                 </div>
 
                 <div class="modal-body">
-                    <form>
+                    <form class="contactForm">
                         <div class="form-group">
                             <label for="casno" class="control-label"><span class="glyphicon glyphicon-tag"></span>CasNo:</label>
                             <input type="text" class="form-control" readonly="readonly" id="casno">
                         </div>
                         <div class="form-group">
-                            <label for="name" class="control-label"><span class="glyphicon glyphicon-user"></span>Name:</label>
-                            <input type="text" class="form-control" id="name">
+                            <label for="name" class="control-label"><span class="glyphicon glyphicon-user"></span>Name*:</label>
+                            <input type="text" class="form-control" id="cname" name="cname">
                         </div>
                         <div class="form-group">
-                            <label for="mobile" class="control-label"><span class="glyphicon glyphicon-phone"></span>Mobile:</label>
-                            <input type="tel" class="form-control" id="mobile">
+                            <label for="country" class="control-label"><span class="glyphicon glyphicon-flag"></span>Country:</label>
+                            <input type="text" class="form-control" id="country" name="country">
                         </div>
                         <div class="form-group">
-                            <label for="e-mail" class="control-label"><span class="glyphicon glyphicon-envelope"></span>E-mail:</label>
-                            <input type="email" class="form-control" id="e-mail">
+                            <label for="city" class="control-label"><span class="glyphicon glyphicon-home"></span>City:</label>
+                            <input type="text" class="form-control" id="city" name="city">
+                        </div>
+                        <div class="form-group">
+                            <label for="mobile" class="control-label"><span class="glyphicon glyphicon-phone"></span>Mobile*:</label>
+                            <input type="tel" class="form-control" id="mobile" name="mobile">
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="control-label"><span class="glyphicon glyphicon-envelope"></span>E-mail*:</label>
+                            <input type="email" class="form-control" id="email" name="email">
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="control-label"><span
-                                    class="glyphicon glyphicon-comment"></span>Message:</label>
-                            <textarea class="form-control" id="message-text"></textarea>
+                                    class="glyphicon glyphicon-comment"></span>Message*:</label>
+                            <textarea class="form-control" id="message-text" id="message" name="message"></textarea>
                         </div>
                         <div class="form-group">
                             <h4>We will reply you ASAP!!</h4>
@@ -84,7 +92,7 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal"><span
                             class="glyphicon glyphicon-remove"></span>Close
                     </button>
-                    <button type="button" class="btn btn-success" id="submit-btn">
+                    <button type="submit" class="btn btn-success" id="submit-btn">
                         <span class="glyphicon glyphicon-envelope"></span>
                         Submit
                     </button>
@@ -100,6 +108,8 @@
 
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="http://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
+<link href="http://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet">
 <script type="text/javascript">
     var pageNO = 1;
 
@@ -161,8 +171,43 @@
             })
         })
 
-        $(document).on('click','.viewmore',function (e){
-
+        $('.contactForm').bootstrapValidator({
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                cname: {
+                    validators: {
+                        notEmpty: {
+                            message: 'name is not empty!'
+                        }
+                    }
+                },
+                mobile: {
+                    validators: {
+                        notEmpty: {
+                            message: 'mobile is not empty!'
+                        }
+                    }
+                },
+                email: {
+                    validators: {
+                        notEmpty: {
+                            message: 'e-mail is not empty!'
+                        }
+                    }
+                },
+                message: {
+                    validators: {
+                        notEmpty: {
+                            message: 'message is not empty!'
+                        }
+                    }
+                }
+            }
         });
 
 

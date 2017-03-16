@@ -16,72 +16,144 @@
     <table id="10" parent="2" name="cas_prodecut">
       <Comment>化学产品表</Comment>
     </table>
-    <table id="11" parent="2" name="indexs">
+    <table id="11" parent="2" name="contact">
+      <Comment>联系人表</Comment>
+    </table>
+    <table id="12" parent="2" name="indexs">
       <Comment>索引页面</Comment>
     </table>
-    <column id="12" parent="10" name="cas_name">
+    <column id="13" parent="10" name="cas_name">
       <Position>1</Position>
       <Comment>化合物英文学名</Comment>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="13" parent="10" name="cas_no">
+    <column id="14" parent="10" name="cas_no">
       <Position>2</Position>
-      <Comment>产品编号</Comment>
+      <Comment>产品编号
+</Comment>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="14" parent="10" name="synonyms">
+    <column id="15" parent="10" name="synonyms">
       <Position>3</Position>
       <Comment>同义词</Comment>
-      <DataType>varchar(200)|0</DataType>
+      <DataType>varchar(1000)|0</DataType>
+      <NotNull>1</NotNull>
     </column>
-    <column id="15" parent="10" name="formula">
+    <column id="16" parent="10" name="formula">
       <Position>4</Position>
       <Comment>化学公式</Comment>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="16" parent="10" name="exact_mass">
+    <column id="17" parent="10" name="exact_mass">
       <Position>5</Position>
       <Comment>精确质量</Comment>
       <DataType>varchar(50)|0</DataType>
     </column>
-    <column id="17" parent="10" name="molecular_weight">
+    <column id="18" parent="10" name="molecular_weight">
       <Position>6</Position>
       <Comment>分子量</Comment>
       <DataType>varchar(50)|0</DataType>
     </column>
-    <column id="18" parent="10" name="psa">
+    <column id="19" parent="10" name="psa">
       <Position>7</Position>
       <DataType>varchar(50)|0</DataType>
     </column>
-    <column id="19" parent="10" name="logp">
+    <column id="20" parent="10" name="logp">
       <Position>8</Position>
       <DataType>varchar(50)|0</DataType>
     </column>
-    <column id="20" parent="10" name="cas_url">
+    <column id="21" parent="10" name="cas_url">
       <Position>9</Position>
-      <Comment>产品详情页链接</Comment>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <key id="22" parent="10" name="PRIMARY">
+      <ColNames>cas_no</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="23" parent="11" name="cas_no">
+      <Position>1</Position>
+      <Comment>CAS编号</Comment>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="24" parent="11" name="cas_name">
+      <Position>2</Position>
+      <Comment>cas名称</Comment>
       <DataType>varchar(500)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="21" parent="10" name="PRIMARY">
-      <ColNames>cas_url</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="22" parent="11" name="url">
+    <column id="25" parent="11" name="c_name">
+      <Position>3</Position>
+      <Comment>姓名</Comment>
+      <DataType>varchar(100)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="26" parent="11" name="mobile">
+      <Position>4</Position>
+      <Comment>联系信息</Comment>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="27" parent="11" name="email">
+      <Position>5</Position>
+      <Comment>电子邮件</Comment>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="28" parent="11" name="message">
+      <Position>6</Position>
+      <Comment>留言</Comment>
+      <DataType>varchar(1000)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="29" parent="11" name="country">
+      <Position>7</Position>
+      <Comment>国家</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="30" parent="11" name="city">
+      <Position>8</Position>
+      <Comment>城市</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="31" parent="11" name="contacted">
+      <Position>10</Position>
+      <Comment>已经联系</Comment>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="32" parent="11" name="intention">
+      <Position>11</Position>
+      <Comment>意向：1,感兴趣,保持联系
+2,合作过，会再次使用服务
+3,交易完成
+4,交易进行中
+5,投诉
+6,纠纷
+</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="33" parent="11" name="updata_date">
+      <Position>9</Position>
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <column id="34" parent="12" name="url">
       <Position>1</Position>
       <Comment>索引的链接</Comment>
       <DataType>varchar(500)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="23" parent="11" name="visited">
+    <column id="35" parent="12" name="visited">
       <Position>2</Position>
       <Comment>是否已经收录</Comment>
       <DataType>int(11)|0</DataType>
     </column>
-    <key id="24" parent="11" name="PRIMARY">
+    <key id="36" parent="12" name="PRIMARY">
       <ColNames>url</ColNames>
       <Primary>1</Primary>
     </key>
