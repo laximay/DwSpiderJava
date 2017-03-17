@@ -41,7 +41,7 @@ public class CasController {
         int Limit = pageNo * DefLimit;
         int offet = Limit - DefLimit;
         int AllCount = casProdecutService.getCasListCount(newArgs);
-        if (Limit > AllCount) {
+        if (pageNo>1 && Limit > AllCount) {
             return new CasDto(CasDto.FAIL, "bottom！！");
         } else {
             List<CasProdecut> casProdecuts = casProdecutService.queryByNameAndNo(newArgs, offet, DefLimit);

@@ -9,7 +9,7 @@
     <select id="queryByNameAndNo" resultType="CasProdecut">
       select cas_name, cas_no, synonyms , formula, exact_mass, molecular_weight, psa, logp, cas_url
       FROM cas_prodecut
-      WHERE cas_name like #{searchArgs} or cas_no like #{searchArgs} ORDER BY cas_no DESC
+      WHERE cas_name like #{searchArgs} or cas_no like #{searchArgs} or formula like #{searchArgs} ORDER BY cas_no DESC
       Limit  #{offet}, #{limit}
     </select>
 
